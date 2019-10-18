@@ -39,7 +39,7 @@ See [these docs](https://godoc.org/github.com/cristalhq/pgstats).
 
 [MIT License](LICENSE).
 
-[build-img]: https://github.com/cristalhq/pgstats/workflows/build/badge.svg
+[build-img]: https://github.com/cristalhq/pgstats/workflows/Go/badge.svg
 [build-url]: https://github.com/cristalhq/pgstats/actions
 [doc-img]: https://godoc.org/github.com/cristalhq/pgstats?status.svg
 [doc-url]: https://godoc.org/github.com/cristalhq/pgstats
