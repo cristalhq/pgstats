@@ -14,7 +14,7 @@ var host, port, dbname, user, pass, mode string
 var testConn *sql.DB
 
 func init() {
-	flag.StringVar(&host, "host", "postgres", "test host")
+	flag.StringVar(&host, "host", "127.0.0.1", "test host")
 	flag.StringVar(&port, "port", "5432", "test port")
 	flag.StringVar(&dbname, "dbname", "postgres_db", "test db name")
 	flag.StringVar(&user, "user", "postgres_user", "test username")

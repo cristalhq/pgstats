@@ -1,7 +1,7 @@
 name: Go
 on: [push]
 jobs:
-  container-job:
+  build:
     runs-on: ubuntu-latest
 
     # container:
