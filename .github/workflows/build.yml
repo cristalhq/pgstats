@@ -4,9 +4,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # container:
-    #   image: golang-1.13.3 #-alpine3.10
-
     services:
       postgres:
         image: postgres:10.10
