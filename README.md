@@ -3,7 +3,7 @@
 [![Build Status][build-img]][build-url]
 [![GoDoc][doc-img]][doc-url]
 [![Go Report Card][reportcard-img]][reportcard-url]
-[![Go Report Card][coverage-img]][coverage-url]
+[![Coverage][coverage-img]][coverage-url]
 
 Postgres statistics.
 
@@ -60,5 +60,5 @@ See [these docs](https://godoc.org/github.com/cristalhq/pgstats).
 [doc-url]: https://godoc.org/github.com/cristalhq/pgstats
 [reportcard-img]: https://goreportcard.com/badge/cristalhq/pgstats
 [reportcard-url]: https://goreportcard.com/report/cristalhq/pgstats
-[coverage-img]: https://coveralls.io/repos/github/cristalhq/pgstats/badge.svg?branch=master
-[coverage-url]: https://coveralls.io/github/cristalhq/pgstats?branch=master
+[coverage-img]: https://codecov.io/gh/cristalhq/pgstats/branch/master/graph/badge.svg
+[coverage-url]: https://codecov.io/gh/cristalhq/pgstats
