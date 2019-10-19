@@ -69,5 +69,5 @@ func (s *Stats) fetchIoIndexes(table string) ([]IoIndexesRow, error) {
 		}
 		data = append(data, row)
 	}
-	return data, nil
+	return data, rows.Err()
 }
