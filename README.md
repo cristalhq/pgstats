@@ -9,14 +9,13 @@ Postgres statistics.
 
 ## Features
 
-* Dependency-free.
 * Supportes versions (see https://www.postgresql.org/support/versioning/)
-    - 9.4
-    - 9.5
-    - 9.6
-    - 10
-    - 11
-    - 12
+    - 9.4.x
+    - 9.5.x
+    - 9.6.x
+    - 10.x
+    - 11.x
+    - 12.x
 
 ## Install
 
@@ -29,6 +28,22 @@ go get github.com/cristalhq/pgstats
 ## Example
 
 ```go
+var db *sql.DB
+// init db
+
+stats, err := New(db)
+if err != nil {
+    ...
+}
+
+all, err := stats.AllIndexes()
+if err != nil {
+    ...
+}
+
+for _, index := range all {
+    fmt.Printf("index name: %v\n", index.Indexrelname)
+}
 ```
 
 ## Documentation
