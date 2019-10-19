@@ -97,6 +97,7 @@ func TestDatabase(t *testing.T) {
 }
 
 func TestFunctions(t *testing.T) {
+	t.Skip()
 	stats, err := New(testConn)
 	noErr(t, err)
 
@@ -108,6 +109,7 @@ func TestFunctions(t *testing.T) {
 }
 
 func TestIndex(t *testing.T) {
+	t.Skip()
 	stats, err := New(testConn)
 	noErr(t, err)
 
@@ -122,6 +124,7 @@ func TestIndex(t *testing.T) {
 }
 
 func TestIoIndex(t *testing.T) {
+	t.Skip()
 	stats, err := New(testConn)
 	noErr(t, err)
 
@@ -152,6 +155,7 @@ func TestReplication(t *testing.T) {
 }
 
 func TestSequences(t *testing.T) {
+	t.Skip()
 	stats, err := New(testConn)
 	noErr(t, err)
 
@@ -174,6 +178,7 @@ func TestSsl(t *testing.T) {
 }
 
 func TestStatements(t *testing.T) {
+	t.Skip()
 	stats, err := New(testConn)
 	noErr(t, err)
 
@@ -190,6 +195,7 @@ func TestSubscription(t *testing.T) {
 }
 
 func TestTables(t *testing.T) {
+	t.Skip()
 	stats, err := New(testConn)
 	noErr(t, err)
 
@@ -204,6 +210,7 @@ func TestTables(t *testing.T) {
 }
 
 func TestWalReceiver(t *testing.T) {
+	t.Skip()
 	stats, err := New(testConn)
 	noErr(t, err)
 
@@ -212,6 +219,7 @@ func TestWalReceiver(t *testing.T) {
 }
 
 func TestXactTables(t *testing.T) {
+	t.Skip()
 	stats, err := New(testConn)
 	noErr(t, err)
 
