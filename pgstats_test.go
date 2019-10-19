@@ -56,10 +56,171 @@ func isOK(t *testing.T, size int, err error) {
 	}
 }
 
+func TestActivity(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.Activity()
+	isOK(t, 1, err)
+}
+
 func TestArchiver(t *testing.T) {
 	stats, err := New(testConn)
 	noErr(t, err)
 
 	_, err = stats.Archiver()
 	isOK(t, 1, err)
+}
+
+func TestBgWriter(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.BgWriter()
+	isOK(t, 1, err)
+}
+
+func TestDatabaseConflicts(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.DatabaseConflicts()
+	isOK(t, 1, err)
+}
+
+func TestDatabase(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.Database()
+	isOK(t, 1, err)
+}
+
+func TestFunctions(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	funcs, err := stats.UserFunctions()
+	isOK(t, len(funcs), err)
+
+	xfuncs, err := stats.XactUserFunctions()
+	isOK(t, len(xfuncs), err)
+}
+
+func TestIndex(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	all, err := stats.AllIndexes()
+	isOK(t, len(all), err)
+
+	sys, err := stats.SystemIndexes()
+	isOK(t, len(sys), err)
+
+	usr, err := stats.UserIndexes()
+	isOK(t, len(usr), err)
+}
+
+func TestIoIndex(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	all, err := stats.IoAllIndexes()
+	isOK(t, len(all), err)
+
+	sys, err := stats.IoSystemIndexes()
+	isOK(t, len(sys), err)
+
+	usr, err := stats.IoUserIndexes()
+	isOK(t, len(usr), err)
+}
+
+func TestProgressVacuum(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.ProgressVacuum()
+	isOK(t, 1, err)
+}
+
+func TestReplication(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.Replication()
+	isOK(t, 1, err)
+}
+
+func TestSequences(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	all, err := stats.IoAllSequences()
+	isOK(t, len(all), err)
+
+	sys, err := stats.IoSystemSequences()
+	isOK(t, len(sys), err)
+
+	usr, err := stats.IoSystemSequences()
+	isOK(t, len(usr), err)
+}
+
+func TestSsl(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.Ssl()
+	isOK(t, 1, err)
+}
+
+func TestStatements(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.Statements()
+	isOK(t, 1, err)
+}
+
+func TestSubscription(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.Subscription()
+	isOK(t, 1, err)
+}
+
+func TestTables(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	all, err := stats.AllTables()
+	isOK(t, len(all), err)
+
+	sys, err := stats.SystemTables()
+	isOK(t, len(sys), err)
+
+	usr, err := stats.UserTables()
+	isOK(t, len(usr), err)
+}
+
+func TestWalReceiver(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	_, err = stats.WalReceiver()
+	isOK(t, 1, err)
+}
+
+func TestXactTables(t *testing.T) {
+	stats, err := New(testConn)
+	noErr(t, err)
+
+	all, err := stats.XactAllTables()
+	isOK(t, len(all), err)
+
+	sys, err := stats.XactSystemTables()
+	isOK(t, len(sys), err)
+
+	usr, err := stats.XactUserTables()
+	isOK(t, len(usr), err)
 }
