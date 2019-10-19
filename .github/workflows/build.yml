@@ -36,3 +36,11 @@ jobs:
 
     - name: Test
       run: go test -v .
+      
+    - name: Generate Coverage
+      run: go test -race -coverprofile=coverage.txt -covermode=atomic
+    
+    - name: Upload Coverage
+      uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}} 
