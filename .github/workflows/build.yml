@@ -5,8 +5,20 @@ jobs:
   build:
     name: Build & Test
     runs-on: ubuntu-latest
-    steps:
 
+    services:
+      postgres:
+        image: postgres:10.10
+        env:
+          POSTGRES_USER: postgres_user
+          POSTGRES_PASSWORD: postgres_pass
+          POSTGRES_DB: postgres_db
+        ports:
+        - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
     - name: Set up Go 1.13
       uses: actions/setup-go@v1
       with:
