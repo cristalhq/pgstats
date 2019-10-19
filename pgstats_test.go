@@ -26,10 +26,14 @@ func init() {
 	user=%s password=%s
 	dbname=%s
 	sslmode=%s`, host, port, user, pass, dbname, mode)
+	fmt.Printf("connection: %v\n\n", connString)
 
 	var err error
 	testConn, err = sql.Open("postgres", connString)
 	if err != nil {
+		panic(err)
+	}
+	if err := testConn.Ping(); err != nil {
 		panic(err)
 	}
 }
