@@ -2,7 +2,7 @@ package pgstats
 
 import "database/sql"
 
-// Database returns rows from a `pg_stat_bgwriter` view.
+// BgWriter returns rows from a `pg_stat_bgwriter` view.
 // One row only, showing statistics about the background writer process's activity. See pg_stat_bgwriter for details.
 //
 // See: https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-BGWRITER-VIEW
