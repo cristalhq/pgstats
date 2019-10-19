@@ -4,6 +4,9 @@ jobs:
   container-job:
     runs-on: ubuntu-latest
 
+    container:
+      image: 1.13.3-alpine3.10
+
     services:
       postgres:
         image: postgres:10.10
@@ -17,12 +20,6 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - name: Set up Go 1.13
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.13
-      id: go
-
     - name: Check out code
       uses: actions/checkout@v1
 
