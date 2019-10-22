@@ -1,4 +1,4 @@
-package pgstats
+package pgstats_test
 
 import (
 	"database/sql"
@@ -7,6 +7,8 @@ import (
 	"testing"
 
 	_ "github.com/lib/pq"
+
+	"github.com/cristalhq/pgstats"
 )
 
 var host, port, dbname, user, pass, mode string
@@ -14,13 +16,21 @@ var host, port, dbname, user, pass, mode string
 var testConn *sql.DB
 
 func init() {
+	readEnv()
+	initConn()
+	warmup()
+}
+
+func readEnv() {
 	flag.StringVar(&host, "host", "127.0.0.1", "test host")
 	flag.StringVar(&port, "port", "5432", "test port")
 	flag.StringVar(&dbname, "dbname", "postgres_db", "test db name")
 	flag.StringVar(&user, "user", "postgres_user", "test username")
 	flag.StringVar(&pass, "pass", "postgres_pass", "test pass")
 	flag.StringVar(&mode, "mode", "disable", "test mode")
+}
 
+func initConn() {
 	connString := fmt.Sprintf(`
 	host=%s port=%s
 	user=%s password=%s
@@ -35,6 +45,13 @@ func init() {
 		panic(err)
 	}
 	if err := testConn.Ping(); err != nil {
+		panic(err)
+	}
+}
+
+func warmup() {
+	_, err := testConn.Query(`create sequence text_seq;`)
+	if err != nil {
 		panic(err)
 	}
 }
@@ -57,7 +74,7 @@ func isOK(t *testing.T, size int, err error) {
 }
 
 func TestActivity(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.Activity()
@@ -65,7 +82,7 @@ func TestActivity(t *testing.T) {
 }
 
 func TestArchiver(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.Archiver()
@@ -73,7 +90,7 @@ func TestArchiver(t *testing.T) {
 }
 
 func TestBgWriter(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.BgWriter()
@@ -81,7 +98,7 @@ func TestBgWriter(t *testing.T) {
 }
 
 func TestDatabaseConflicts(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.DatabaseConflicts()
@@ -89,7 +106,7 @@ func TestDatabaseConflicts(t *testing.T) {
 }
 
 func TestDatabase(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.Database()
@@ -98,7 +115,7 @@ func TestDatabase(t *testing.T) {
 
 func TestFunctions(t *testing.T) {
 	t.Skip()
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	funcs, err := stats.UserFunctions()
@@ -110,7 +127,7 @@ func TestFunctions(t *testing.T) {
 
 func TestIndex(t *testing.T) {
 	t.Skip()
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	all, err := stats.AllIndexes()
@@ -125,7 +142,7 @@ func TestIndex(t *testing.T) {
 
 func TestIoIndex(t *testing.T) {
 	t.Skip()
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	all, err := stats.IoAllIndexes()
@@ -139,7 +156,7 @@ func TestIoIndex(t *testing.T) {
 }
 
 func TestProgressVacuum(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.ProgressVacuum()
@@ -147,7 +164,7 @@ func TestProgressVacuum(t *testing.T) {
 }
 
 func TestReplication(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.Replication()
@@ -156,7 +173,7 @@ func TestReplication(t *testing.T) {
 
 func TestSequences(t *testing.T) {
 	t.Skip()
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	all, err := stats.IoAllSequences()
@@ -170,7 +187,7 @@ func TestSequences(t *testing.T) {
 }
 
 func TestSsl(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.Ssl()
@@ -179,7 +196,7 @@ func TestSsl(t *testing.T) {
 
 func TestStatements(t *testing.T) {
 	t.Skip()
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.Statements()
@@ -187,7 +204,7 @@ func TestStatements(t *testing.T) {
 }
 
 func TestSubscription(t *testing.T) {
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.Subscription()
@@ -196,7 +213,7 @@ func TestSubscription(t *testing.T) {
 
 func TestTables(t *testing.T) {
 	t.Skip()
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	all, err := stats.AllTables()
@@ -211,7 +228,7 @@ func TestTables(t *testing.T) {
 
 func TestWalReceiver(t *testing.T) {
 	t.Skip()
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	_, err = stats.WalReceiver()
@@ -220,7 +237,7 @@ func TestWalReceiver(t *testing.T) {
 
 func TestXactTables(t *testing.T) {
 	t.Skip()
-	stats, err := New(testConn)
+	stats, err := pgstats.New(testConn)
 	noErr(t, err)
 
 	all, err := stats.XactAllTables()
