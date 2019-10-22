@@ -18,7 +18,7 @@ var testConn *sql.DB
 func init() {
 	readEnv()
 	initConn()
-	warmup()
+	// warmup()
 }
 
 func readEnv() {
